@@ -23,7 +23,12 @@ public class GConfig {
                 10,
                 0,
                 Integer.MAX_VALUE,
-                "1 in X chance per chunk. 0 disables cathedral generation."
+                "Examples.\n" +
+                        "0 = never generate.\n" +
+                        "1 = every eligible chunk.\n" +
+                        "2 = about half of eligible chunks.\n" +
+                        "10 = about 1 in 10 chunks.\n" +
+                        "100 = about 1 in 100 chunks."
         );
 
         if (config.hasChanged()) {

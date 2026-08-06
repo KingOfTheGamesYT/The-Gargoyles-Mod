@@ -1,6 +1,7 @@
 package net.minecraft.gargoyles;
 
 import java.util.Random;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -11,8 +12,15 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 public class WorldGen implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         int dimensionId = world.provider.getDimension();
-        if (dimensionId != 1 && dimensionId != -1 && random.nextInt(10) == 0) {
-            this.generateStructure(chunkProvider, random, world, chunkX, chunkZ, new WorldGenCathedrial(), 256, 1);
+        if (dimensionId != 1 && dimensionId != -1) {
+
+            if (GConfig.cathedralGenerationChance <= 0) {
+                return;
+            }
+
+            if (random.nextInt(GConfig.cathedralGenerationChance) == 0) {
+                this.generateStructure(chunkProvider, random, world, chunkX, chunkZ, new WorldGenCathedrial(), 256, 1);
+            }
         }
 
     }

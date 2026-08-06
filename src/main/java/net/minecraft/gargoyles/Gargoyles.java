@@ -17,6 +17,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import java.io.File;
+
 @Mod(modid = "gargoyles", name = "Gargoyles Mod", version = "1.0.2", acceptedMinecraftVersions = "[1.12.2]")
 public class Gargoyles {
     public static final String MODNAME = "Gargoyles Mod";
@@ -41,6 +43,8 @@ public class Gargoyles {
         EntityParrot.registerMimicSound(EntityGargoyle.class, ModSoundEvents.gargoyleLiving);
         EntityParrot.registerMimicSound(EntityIronGolem.class, SoundEvents.ENTITY_IRONGOLEM_HURT);
         EntityParrot.registerMimicSound(EntitySnowman.class, SoundEvents.ENTITY_SNOWMAN_HURT);
+        File configFile = new File(e.getModConfigurationDirectory(), MODID + ".cfg");
+        GConfig.init(configFile);
     }
 
     @EventHandler
