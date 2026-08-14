@@ -15,10 +15,12 @@ public class RenderTheGargoyle {
         createEntity(EntityEvilGargoyle.class, entityName2);
         createEgg(entityName1, 11316396, 10526880);
         createEgg(entityName2, 10526880, 6579300);
-        createVanillaEgg("giant", 44975, 7969893);
-        createVanillaEgg("illusion_illager", 1267859, 9804699);
-        createVanillaEgg("snowman", 15663103, 14913565);
-        createVanillaEgg("villager_golem", 13288125, 13680304);
+        if (GConfig.addVanillaSpawnEggs) {
+            createVanillaEgg("giant", 44975, 7969893);
+            createVanillaEgg("illusion_illager", 1267859, 9804699);
+            createVanillaEgg("snowman", 15663103, 14913565);
+            createVanillaEgg("villager_golem", 13288125, 13680304);
+        }
     }
 
     public static void createEntity(Class entityClass, String entityName) {

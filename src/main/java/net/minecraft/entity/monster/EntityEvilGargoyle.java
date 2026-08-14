@@ -3,9 +3,12 @@ package net.minecraft.entity.monster;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Sets;
+
 import java.util.List;
 import java.util.Set;
+
 import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
@@ -21,6 +24,7 @@ import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.gargoyles.GConfig;
 import net.minecraft.gargoyles.GargoyleBlocks;
 import net.minecraft.gargoyles.ModSoundEvents;
 import net.minecraft.gargoyles.blocks.BlockPerch;
@@ -35,6 +39,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -46,6 +51,7 @@ public class EntityEvilGargoyle extends EntityMob {
     public double waypointZ;
     private int attackTimer;
     private static final Predicate<EntityLivingBase> ATTACKABLE = new Predicate<EntityLivingBase>() {
+
         public boolean apply(@Nullable EntityLivingBase p_apply_1_) {
             return p_apply_1_ != null && !(p_apply_1_ instanceof IMob) && p_apply_1_.attackable();
         }
@@ -55,7 +61,7 @@ public class EntityEvilGargoyle extends EntityMob {
         super(p_i1694_1_);
         this.enablePersistence();
         this.setSize(0.9F, 2.4F);
-        this.experienceValue = 10;
+        this.experienceValue = GConfig.evilGargoyleExperience;
         this.tasks.addTask(0, new AIPerch());
         this.tasks.addTask(1, new EntityAIAttackMelee(this, (double)1.0F, true));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
@@ -70,7 +76,6 @@ public class EntityEvilGargoyle extends EntityMob {
         } else {
             super.setAttackTarget(entitylivingbaseIn);
         }
-
     }
 
     protected ResourceLocation getLootTable() {
@@ -81,12 +86,13 @@ public class EntityEvilGargoyle extends EntityMob {
         return !this.onGround ? 1.4F : (this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY - (double)0.5F), MathHelper.floor(this.posZ))).getBlock() == this.getFavoriteBlockToPerch() ? 0.875F + this.rotationPitch / 40.0F : 2.1F);
     }
 
+    @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)50.0F);
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue((double)24.0F);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue((double)0.25F);
-        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue((double)1.0F);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(GConfig.evilGargoyleHealth);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(GConfig.evilGargoyleFollowRange);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(GConfig.evilGargoyleMovementSpeed);
+        this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(GConfig.evilGargoyleKnockbackResistance);
     }
 
     public boolean canAttackClass(Class cls) {
@@ -150,8 +156,9 @@ public class EntityEvilGargoyle extends EntityMob {
                 this.renderYawOffset = this.rotationYaw = this.rotationYawHead;
                 this.noClip = false;
                 this.extinguish();
+
                 if ((this.ticksExisted + this.getEntityId()) % (this.world.getBlockState(pos).getBlock() == this.getFavoriteBlockToPerch() ? 20 : 40) == 0) {
-                    this.heal(this.world.getBlockState(pos).getBlock() == this.getFavoriteBlockToPerch() ? 2.0F : 1.0F);
+                    this.heal(this.world.getBlockState(pos).getBlock() == this.getFavoriteBlockToPerch() ? GConfig.evilGargoyleFavoritePerchHeal : GConfig.evilGargoyleNormalPerchHeal);
                 }
             }
         } else {
@@ -168,7 +175,7 @@ public class EntityEvilGargoyle extends EntityMob {
             double d0 = entity.posX - this.posX;
             double d1 = entity.posZ - this.posZ;
             double d3 = d0 * d0 + d1 * d1;
-            if (!this.world.isRemote && this.isEntityAlive() && this.getDistanceSq(entity) <= (double)(entity.width * entity.width + this.width * this.width) + (double)16.0F && (this.ticksExisted + this.getEntityId()) % 20 == 0 && this.canEntityBeSeen(entity)) {
+            if (!this.world.isRemote && this.isEntityAlive() && this.getDistanceSq(entity) <= (double)(entity.width * entity.width + this.width * this.width) + (double)16.0F && (this.ticksExisted + this.getEntityId()) % GConfig.evilGargoyleAttackCooldown == 0 && this.canEntityBeSeen(entity)) {
                 this.attackEntityAsMob(entity);
                 this.getLookHelper().setLookPositionWithEntity(entity, 180.0F, 40.0F);
             }
@@ -188,7 +195,7 @@ public class EntityEvilGargoyle extends EntityMob {
 
         if (!this.world.isRemote && this.getAttackTarget() == null) {
             List<EntityLiving> list = this.world.getEntitiesWithinAABB(EntityLiving.class, this.getEntityBoundingBox().grow(this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getAttributeValue()), Predicates.and(ATTACKABLE, EntitySelectors.NOT_SPECTATING));
-            if (list != null && !list.isEmpty() && this.rand.nextInt(10) == 0) {
+            if (list != null && !list.isEmpty() && this.rand.nextInt(GConfig.evilGargoyleTargetSearchChance) == 0) {
                 for(int i = 0; i < list.size(); ++i) {
                     EntityLiving entity1 = (EntityLiving)list.get(this.rand.nextInt(list.size()));
                     if (this.isEntityAlive() && entity1.isEntityAlive() && this.canAttackClass(entity1.getClass()) && !(entity1 instanceof IMob)) {
@@ -259,10 +266,16 @@ public class EntityEvilGargoyle extends EntityMob {
     public boolean attackEntityAsMob(Entity p_70652_1_) {
         this.attackTimer = 10;
         this.world.setEntityState(this, (byte)4);
-        boolean flag = p_70652_1_.attackEntityFrom(DamageSource.causeMobDamage(this), 6.0F + this.rand.nextFloat() * 6.0F);
-        if (flag) {
-            p_70652_1_.motionY += 0.3;
+        float damage = GConfig.evilGargoyleMinDamage;
+
+        if (GConfig.evilGargoyleMaxDamage > GConfig.evilGargoyleMinDamage) {
+            damage += this.rand.nextFloat() * (GConfig.evilGargoyleMaxDamage - GConfig.evilGargoyleMinDamage);
         }
+
+        boolean flag = p_70652_1_.attackEntityFrom(
+                DamageSource.causeMobDamage(this),
+                damage
+        );
 
         this.playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.0F);
         return flag;

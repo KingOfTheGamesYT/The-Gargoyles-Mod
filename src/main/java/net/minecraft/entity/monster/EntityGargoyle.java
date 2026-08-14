@@ -3,9 +3,12 @@ package net.minecraft.entity.monster;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Sets;
+
 import java.util.List;
 import java.util.Set;
+
 import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
@@ -16,8 +19,8 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.gargoyles.GConfig;
 import net.minecraft.gargoyles.GargoyleBlocks;
 import net.minecraft.gargoyles.ModSoundEvents;
 import net.minecraft.gargoyles.blocks.BlockPerch;
@@ -41,6 +44,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+
 import net.minecraftforge.common.IPlantable;
 
 public class EntityGargoyle extends EntityIronGolem {
@@ -74,7 +78,6 @@ public class EntityGargoyle extends EntityIronGolem {
         } else {
             super.setAttackTarget(entitylivingbaseIn);
         }
-
     }
 
     protected ResourceLocation getLootTable() {
@@ -112,26 +115,26 @@ public class EntityGargoyle extends EntityIronGolem {
         this.dataManager.set(TYPE, p_82201_1_);
         switch (p_82201_1_) {
             case 0:
-                this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)50.0F);
-                this.setHealth(50.0F);
+                this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(GConfig.stoneGargoyleHealth);
+                this.setHealth(GConfig.stoneGargoyleHealth);
             case 1:
-                this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)30.0F);
-                this.setHealth(30.0F);
+                this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(GConfig.sandstoneGargoyleHealth);
+                this.setHealth(GConfig.sandstoneGargoyleHealth);
             case 2:
-                this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)200.0F);
-                this.setHealth(200.0F);
+                this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(GConfig.obsidianGargoyleHealth);
+                this.setHealth(GConfig.obsidianGargoyleHealth);
             case 3:
-                this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)80.0F);
-                this.setHealth(80.0F);
+                this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(GConfig.goldenGargoyleHealth);
+                this.setHealth(GConfig.goldenGargoyleHealth);
             case 4:
-                this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)100.0F);
-                this.setHealth(100.0F);
+                this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(GConfig.ironGargoyleHealth);
+                this.setHealth(GConfig.ironGargoyleHealth);
             case 5:
-                this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)120.0F);
-                this.setHealth(120.0F);
+                this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(GConfig.endStoneGargoyleHealth);
+                this.setHealth(GConfig.endStoneGargoyleHealth);
             case 6:
-                this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)60.0F);
-                this.setHealth(60.0F);
+                this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(GConfig.netherBrickGargoyleHealth);
+                this.setHealth(GConfig.netherBrickGargoyleHealth);
             default:
         }
     }
@@ -141,7 +144,6 @@ public class EntityGargoyle extends EntityIronGolem {
         if (tagCompund.hasKey("GargoyleType", 99)) {
             this.setGargoyleType(tagCompund.getByte("GargoyleType"));
         }
-
     }
 
     public void notifyDataManagerChange(DataParameter<?> key) {
@@ -150,7 +152,6 @@ public class EntityGargoyle extends EntityIronGolem {
             this.clientSideAttackTime = 0;
             this.targetedEntity = null;
         }
-
     }
 
     public void writeEntityToNBT(NBTTagCompound tagCompound) {
@@ -160,8 +161,8 @@ public class EntityGargoyle extends EntityIronGolem {
 
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue((double)24.0F);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue((double)0.25F);
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(GConfig.gargoyleFollowRange);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(GConfig.gargoyleMovementSpeed);
     }
 
     public boolean canAttackClass(Class cls) {
@@ -195,22 +196,6 @@ public class EntityGargoyle extends EntityIronGolem {
             } else {
                 this.setState(0);
             }
-        }
-
-        if (this.getGargoyleType() == 6) {
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)60.0F);
-        } else if (this.getGargoyleType() == 5) {
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)120.0F);
-        } else if (this.getGargoyleType() == 4) {
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)100.0F);
-        } else if (this.getGargoyleType() == 3) {
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)80.0F);
-        } else if (this.getGargoyleType() == 2) {
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)200.0F);
-        } else if (this.getGargoyleType() == 1) {
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)30.0F);
-        } else {
-            this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue((double)50.0F);
         }
 
         BlockPos pos = new BlockPos((int)this.waypointX, (int)this.waypointY, (int)this.waypointZ);
@@ -247,7 +232,7 @@ public class EntityGargoyle extends EntityIronGolem {
 
         if (!this.world.isRemote && this.getAttackTarget() == null) {
             List<EntityLiving> list = this.world.getEntitiesWithinAABB(EntityLiving.class, this.getEntityBoundingBox().grow(this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).getAttributeValue()), Predicates.and(ATTACKABLE, EntitySelectors.NOT_SPECTATING));
-            if (list != null && !list.isEmpty() && this.rand.nextInt(10) == 0) {
+            if (list != null && !list.isEmpty() && this.rand.nextInt(GConfig.gargoyleTargetSearchChance) == 0) {
                 for(int i = 0; i < list.size(); ++i) {
                     EntityLiving entity = (EntityLiving)list.get(this.rand.nextInt(list.size()));
                     if (this.isEntityAlive() && entity.isEntityAlive() && this.canAttackClass(entity.getClass()) && entity instanceof IMob && this.canEntityBeSeen(entity)) {
@@ -289,7 +274,8 @@ public class EntityGargoyle extends EntityIronGolem {
                 this.noClip = false;
                 this.extinguish();
                 if ((this.ticksExisted + this.getEntityId()) % (this.world.getBlockState(pos).getBlock() == this.getFavoriteBlockToPerch() ? 20 : 40) == 0) {
-                    this.heal(this.world.getBlockState(pos).getBlock() == this.getFavoriteBlockToPerch() ? 2.0F : 1.0F);
+                    this.heal(this.world.getBlockState(pos).getBlock() == this.getFavoriteBlockToPerch() ? GConfig.gargoyleFavoritePerchHeal : GConfig.gargoyleNormalPerchHeal);
+
                 }
             }
         } else {
@@ -306,7 +292,7 @@ public class EntityGargoyle extends EntityIronGolem {
             double d0 = entity.posX - this.posX;
             double d1 = entity.posZ - this.posZ;
             double d3 = d0 * d0 + d1 * d1;
-            if (!this.world.isRemote && this.isEntityAlive() && this.getDistanceSq(entity) <= (double)(entity.width * entity.width + this.width * this.width) + (double)16.0F && (this.ticksExisted + this.getEntityId()) % 20 == 0 && this.canEntityBeSeen(entity)) {
+            if (!this.world.isRemote && this.isEntityAlive() && this.getDistanceSq(entity) <= (double)(entity.width * entity.width + this.width * this.width) + (double)16.0F && (this.ticksExisted + this.getEntityId()) % GConfig.gargoyleAttackCooldown == 0 && this.canEntityBeSeen(entity)) {
                 this.attackEntityAsMob(entity);
                 this.getLookHelper().setLookPositionWithEntity(entity, 180.0F, 40.0F);
             }
@@ -397,33 +383,82 @@ public class EntityGargoyle extends EntityIronGolem {
         }
     }
 
-    public boolean attackEntityAsMob(Entity p_70652_1_) {
-        this.world.setEntityState(this, (byte)4);
-        boolean flag = p_70652_1_.attackEntityFrom(DamageSource.causeMobDamage(this), this.getGargoyleType() == 6 ? 14.0F : (this.getGargoyleType() == 5 ? 26.0F : (this.getGargoyleType() == 4 ? 14.0F : (this.getGargoyleType() == 3 ? 20.0F : (this.getGargoyleType() == 2 ? 18.0F : (this.getGargoyleType() == 1 ? (this.world.getBiome(this.getPosition()) != Biomes.DESERT && this.world.getBiome(this.getPosition()) != Biomes.DESERT_HILLS ? 6.0F : 12.0F) : 10.0F))))));
+    public boolean attackEntityAsMob(Entity target) {
+        this.world.setEntityState(this, (byte) 4);
+
+        double damage;
+
+        switch (this.getGargoyleType()) {
+            case 0:
+                damage = GConfig.stoneGargoyleDamage;
+                break;
+
+            case 1:
+                if (this.world.getBiome(this.getPosition()) == Biomes.DESERT
+                        || this.world.getBiome(this.getPosition()) == Biomes.DESERT_HILLS) {
+                    damage = GConfig.sandstoneGargoyleDesertDamage;
+                } else {
+                    damage = GConfig.sandstoneGargoyleDamage;
+                }
+                break;
+
+            case 2:
+                damage = GConfig.obsidianGargoyleDamage;
+                break;
+
+            case 3:
+                damage = GConfig.goldenGargoyleDamage;
+                break;
+
+            case 4:
+                damage = GConfig.ironGargoyleDamage;
+                break;
+
+            case 5:
+                damage = GConfig.endStoneGargoyleDamage;
+                break;
+
+            case 6:
+                damage = GConfig.netherBrickGargoyleDamage;
+                break;
+
+            default:
+                damage = GConfig.stoneGargoyleDamage;
+                break;
+        }
+
+        boolean flag = target.attackEntityFrom(DamageSource.causeMobDamage(this), (float) damage);
+
         if (flag) {
             switch (this.getGargoyleType()) {
                 case 0:
-                default:
-                    p_70652_1_.motionY += 0.3;
+                    target.motionY += GConfig.stoneGargoyleKnockUp;
                     break;
+
                 case 1:
-                    p_70652_1_.motionY += 0.15;
+                    target.motionY += GConfig.sandstoneGargoyleKnockUp;
                     break;
+
                 case 2:
-                    p_70652_1_.motionY += (double)0.5F;
+                    target.motionY += GConfig.obsidianGargoyleKnockUp;
                     break;
+
                 case 3:
-                    p_70652_1_.motionY += 0.6;
+                    target.motionY += GConfig.goldenGargoyleKnockUp;
                     break;
+
                 case 4:
-                    p_70652_1_.motionY += 0.4;
+                    target.motionY += GConfig.ironGargoyleKnockUp;
                     break;
+
                 case 5:
-                    p_70652_1_.motionY += (double)0.5F;
+                    target.motionY += GConfig.endStoneGargoyleKnockUp;
                     break;
+
                 case 6:
-                    p_70652_1_.motionY += 0.3;
-                    p_70652_1_.setFire(10);
+                    target.motionY += GConfig.netherBrickGargoyleKnockUp;
+                    target.setFire(GConfig.netherBrickGargoyleFireTime);
+                    break;
             }
         }
 
@@ -476,7 +511,6 @@ public class EntityGargoyle extends EntityIronGolem {
         int j = 1 + this.rand.nextInt(2);
         switch (this.getGargoyleType()) {
             case 0:
-            default:
                 for(int k = 0; k < j; ++k) {
                     this.dropItemWithOffset(Item.getItemFromBlock(Blocks.STONE), 1, 0.0F);
                 }
@@ -511,7 +545,6 @@ public class EntityGargoyle extends EntityIronGolem {
                     this.dropItemWithOffset(Item.getItemFromBlock(Blocks.NETHER_BRICK), 1, 0.0F);
                 }
         }
-
     }
 
     static {
