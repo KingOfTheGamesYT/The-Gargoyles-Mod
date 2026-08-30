@@ -33,7 +33,7 @@ public class Gargoyles {
     @EventHandler
     public void preInit(FMLPreInitializationEvent e) {
         proxy.preInit(e);
-        RenderTheGargoyle.registerEntity();
+        RegistryHandler.registerEntities();
         ModSoundEvents.registerSounds();
         EntityParrot.registerMimicSound(EntityGargoyle.class, ModSoundEvents.gargoyleLiving);
         EntityParrot.registerMimicSound(EntityIronGolem.class, SoundEvents.ENTITY_IRONGOLEM_HURT);

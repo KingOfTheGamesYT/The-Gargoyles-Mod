@@ -4,12 +4,16 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.monster.EntityGargoyle;
 import net.minecraft.gargoyles.blocks.BlockMagicPumpkin;
 import net.minecraft.gargoyles.blocks.BlockPerch;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.GameData;
@@ -32,6 +36,8 @@ public class RegistryHandler {
     public static Item END_STONE_GARGOYLE_EGG;
     public static Item NETHERATIC_GARGOYLE_EGG;
     public static Item EVIL_GARGOYLE_EGG;
+
+    private static int entityId = 0;
 
     public static void init() {
         //Blocks
@@ -132,5 +138,25 @@ public class RegistryHandler {
                 NETHERATIC_GARGOYLE_EGG,
                 EVIL_GARGOYLE_EGG
         );
+    }
+
+    public static void registerEntities() {
+        registerEntity(EntityGargoyle.class, "gargoyle");
+
+        if (GConfig.addVanillaSpawnEggs) {
+            createVanillaEgg("giant", 44975, 7969893);
+            createVanillaEgg("illusion_illager", 1267859, 9804699);
+            createVanillaEgg("snowman", 15663103, 14913565);
+            createVanillaEgg("villager_golem", 13288125, 13680304);
+        }
+    }
+
+    static void registerEntity(Class<? extends Entity> entityClass, String entityName) {
+        ResourceLocation resource = new ResourceLocation("gargoyles", entityName);
+        EntityRegistry.registerModEntity(resource, entityClass, entityName, ++entityId, Gargoyles.modInstance, 256, 1, true);
+    }
+
+    private static void createVanillaEgg(String entityName, int solidColor, int spotColor) {
+        EntityRegistry.registerEgg(new ResourceLocation(entityName), solidColor, spotColor);
     }
 }
