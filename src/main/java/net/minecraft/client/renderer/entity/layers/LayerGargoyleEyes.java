@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.RenderGargoyle;
 import net.minecraft.entity.monster.EntityGargoyle;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -53,7 +54,6 @@ public class LayerGargoyleEyes implements LayerRenderer<EntityGargoyle> {
             GlStateManager.disableBlend();
             GlStateManager.enableAlpha();
         }
-
     }
 
     public boolean shouldCombineTextures() {

@@ -212,7 +212,6 @@ public class ModelGargoyle extends ModelBase {
         } else {
             this.Torso.rotateAngleX = !entityirongolem.onGround ? 1.25F : 0.0F;
         }
-
     }
 
     private float triangleWave(float p_78172_1_, float p_78172_2_) {

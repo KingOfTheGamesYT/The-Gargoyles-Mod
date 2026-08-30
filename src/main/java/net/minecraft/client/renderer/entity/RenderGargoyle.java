@@ -14,12 +14,15 @@ import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.monster.EntityGargoyle;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
+
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class RenderGargoyle extends RenderLiving<EntityGargoyle> {
+    private static final ResourceLocation evilGargoyleTextures = new ResourceLocation("gargoyles", "textures/entities/gargoyle8.png");
     private static final ResourceLocation stoneGargoyleTextures = new ResourceLocation("gargoyles", "textures/entities/gargoyle1.png");
     private static final ResourceLocation sandstoneGargoyleTextures = new ResourceLocation("gargoyles", "textures/entities/gargoyle2.png");
     private static final ResourceLocation obsidianGargoyleTextures = new ResourceLocation("gargoyles", "textures/entities/gargoyle3.png");
@@ -51,32 +54,34 @@ public class RenderGargoyle extends RenderLiving<EntityGargoyle> {
                 return endstoneGargoyleTextures;
             case 6:
                 return nethraticGargoyleTextures;
+            case 7:
+                return evilGargoyleTextures;
         }
     }
 
-    protected void applyRotations(EntityGargoyle p_180588_1_, float p_180588_2_, float p_180588_3_, float p_180588_4_) {
-        super.applyRotations(p_180588_1_, p_180588_2_, p_180588_3_, p_180588_4_);
-        if (p_180588_1_.getGargoyleType() == 1) {
+    protected void applyRotations(EntityGargoyle gargoyle, float p_180588_2_, float p_180588_3_, float p_180588_4_) {
+        super.applyRotations(gargoyle, p_180588_2_, p_180588_3_, p_180588_4_);
+        if (gargoyle.getGargoyleType() == 1) {
             GL11.glScalef(0.75F, 1.0F, 0.75F);
         }
 
-        if (p_180588_1_.getGargoyleType() == 2) {
+        if (gargoyle.getGargoyleType() == 2) {
             GL11.glScalef(1.25F, 1.0F, 1.25F);
         }
 
-        if (p_180588_1_.getGargoyleType() == 3) {
+        if (gargoyle.getGargoyleType() == 3) {
             GL11.glScalef(1.1F, 1.0F, 1.1F);
         }
 
-        if (p_180588_1_.getGargoyleType() == 4) {
+        if (gargoyle.getGargoyleType() == 4) {
             GL11.glScalef(1.2F, 1.0F, 1.2F);
         }
 
-        if (p_180588_1_.getGargoyleType() == 5) {
+        if (gargoyle.getGargoyleType() == 5) {
             GL11.glScalef(1.1F, 1.1F, 1.1F);
         }
 
-        if (p_180588_1_.getGargoyleType() == 6) {
+        if (gargoyle.getGargoyleType() == 6) {
             GL11.glScalef(1.05F, 0.95F, 1.05F);
         }
 
@@ -171,6 +176,5 @@ public class RenderGargoyle extends RenderLiving<EntityGargoyle> {
             tessellator.draw();
             GlStateManager.popMatrix();
         }
-
     }
 }

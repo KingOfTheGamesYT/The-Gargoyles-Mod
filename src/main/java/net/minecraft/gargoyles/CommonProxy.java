@@ -5,11 +5,9 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class CommonProxy {
-    public void registerRenders() {
-    }
 
     public void preInit(FMLPreInitializationEvent e) {
-        GargoyleBlocks.init();
+        RegistryHandler.init();
         this.registerRenderThings();
     }
 

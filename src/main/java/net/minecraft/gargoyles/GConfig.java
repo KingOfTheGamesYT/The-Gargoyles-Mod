@@ -19,42 +19,66 @@ public class GConfig {
     public static float evilGargoyleMaxDamage;
     public static float evilGargoyleFavoritePerchHeal;
     public static float evilGargoyleNormalPerchHeal;
-    public static float evilGargoyleAttackCooldown;
+    public static int evilGargoyleAttackCooldown;
     public static int evilGargoyleTargetSearchChance;
     public static int evilGargoyleExperience;
 
-    public static float gargoyleFollowRange;
-    public static float gargoyleMovementSpeed;
     public static float gargoyleFavoritePerchHeal;
     public static float gargoyleNormalPerchHeal;
-    public static float gargoyleAttackCooldown;
+    public static int gargoyleAttackCooldown;
     public static int gargoyleTargetSearchChance;
+    public static int gargoyleExperience;
 
     public static float stoneGargoyleHealth;
-    public static float sandstoneGargoyleHealth;
-    public static float obsidianGargoyleHealth;
-    public static float goldenGargoyleHealth;
-    public static float ironGargoyleHealth;
-    public static float endStoneGargoyleHealth;
-    public static float netherBrickGargoyleHealth;
-
     public static float stoneGargoyleDamage;
+    public static float stoneGargoyleKnockUp;
+    public static float stoneGargoyleMovementSpeed;
+    public static float stoneGargoyleFollowRange;
+    public static float stoneGargoyleKnockbackResistance;
+
+    public static float sandstoneGargoyleHealth;
     public static float sandstoneGargoyleDamage;
     public static float sandstoneGargoyleDesertDamage;
-    public static float obsidianGargoyleDamage;
-    public static float goldenGargoyleDamage;
-    public static float ironGargoyleDamage;
-    public static float endStoneGargoyleDamage;
-    public static float netherBrickGargoyleDamage;
-    public static int netherBrickGargoyleFireTime;
-
-    public static float stoneGargoyleKnockUp;
     public static float sandstoneGargoyleKnockUp;
+    public static float sandstoneGargoyleMovementSpeed;
+    public static float sandstoneGargoyleFollowRange;
+    public static float sandstoneGargoyleKnockbackResistance;
+
+    public static float obsidianGargoyleHealth;
+    public static float obsidianGargoyleDamage;
     public static float obsidianGargoyleKnockUp;
+    public static float obsidianGargoyleMovementSpeed;
+    public static float obsidianGargoyleFollowRange;
+    public static float obsidianGargoyleKnockbackResistance;
+
+    public static float goldenGargoyleHealth;
+    public static float goldenGargoyleDamage;
     public static float goldenGargoyleKnockUp;
+    public static float goldenGargoyleMovementSpeed;
+    public static float goldenGargoyleFollowRange;
+    public static float goldenGargoyleKnockbackResistance;
+
+    public static float ironGargoyleHealth;
+    public static float ironGargoyleDamage;
     public static float ironGargoyleKnockUp;
+    public static float ironGargoyleMovementSpeed;
+    public static float ironGargoyleFollowRange;
+    public static float ironGargoyleKnockbackResistance;
+
+    public static float endStoneGargoyleHealth;
+    public static float endStoneGargoyleDamage;
     public static float endStoneGargoyleKnockUp;
-    public static float netherBrickGargoyleKnockUp;
+    public static float endStoneGargoyleMovementSpeed;
+    public static float endStoneGargoyleFollowRange;
+    public static float endStoneGargoyleKnockbackResistance;
+
+    public static float netheraticGargoyleHealth;
+    public static float netheraticGargoyleDamage;
+    public static int netheraticGargoyleFireTime;
+    public static float netheraticGargoyleKnockUp;
+    public static float netheraticGargoyleMovementSpeed;
+    public static float netheraticGargoyleFollowRange;
+    public static float netheraticGargoyleKnockbackResistance;
 
     public static void init(File configFile) {
         config = new Configuration(configFile);
@@ -65,7 +89,7 @@ public class GConfig {
 
         cathedralGenerationChance = config.getInt(
                 "CathedralGenerationChance",
-                Configuration.CATEGORY_GENERAL,
+                "MISC",
                 10,
                 0,
                 Integer.MAX_VALUE,
@@ -78,15 +102,15 @@ public class GConfig {
         );
 
         addVanillaSpawnEggs = config.getBoolean(
-                "addVanillaSpawnEggs",
-                Configuration.CATEGORY_GENERAL,
+                "AddVanillaSpawnEggs",
+                "MISC",
                 true,
                 "Adds spawn eggs for vanilla mobs that normally do not have them (Giant, Illusioner, Iron Golem, Snow Golem)."
         );
 
         evilGargoyleHealth = config.getFloat(
                 "EvilGargoyleHealth",
-                Configuration.CATEGORY_GENERAL,
+                "Evil Gargoyle",
                 50.0F,
                 1.0F,
                 Integer.MAX_VALUE,
@@ -95,7 +119,7 @@ public class GConfig {
 
         evilGargoyleFollowRange = config.getFloat(
                 "EvilGargoyleFollowRange",
-                Configuration.CATEGORY_GENERAL,
+                "Evil Gargoyle",
                 24.0F,
                 1.0F,
                 Integer.MAX_VALUE,
@@ -104,7 +128,7 @@ public class GConfig {
 
         evilGargoyleMovementSpeed = config.getFloat(
                 "EvilGargoyleMovementSpeed",
-                Configuration.CATEGORY_GENERAL,
+                "Evil Gargoyle",
                 0.25F,
                 0.0F,
                 Integer.MAX_VALUE,
@@ -113,7 +137,7 @@ public class GConfig {
 
         evilGargoyleKnockbackResistance = config.getFloat(
                 "EvilGargoyleKnockbackResistance",
-                Configuration.CATEGORY_GENERAL,
+                "Evil Gargoyle",
                 1.0F,
                 0.0F,
                 Integer.MAX_VALUE,
@@ -122,7 +146,7 @@ public class GConfig {
 
         evilGargoyleMinDamage = config.getFloat(
                 "MinDamage",
-                Configuration.CATEGORY_GENERAL,
+                "Evil Gargoyle",
                 6.0F,
                 0.0F,
                 Integer.MAX_VALUE,
@@ -131,7 +155,7 @@ public class GConfig {
 
         evilGargoyleMaxDamage = config.getFloat(
                 "MaxDamage",
-                Configuration.CATEGORY_GENERAL,
+                "Evil Gargoyle",
                 12.0F,
                 0.0F,
                 Integer.MAX_VALUE,
@@ -140,7 +164,7 @@ public class GConfig {
 
         evilGargoyleFavoritePerchHeal = config.getFloat(
                 "FavoritePerchHeal",
-                Configuration.CATEGORY_GENERAL,
+                "Evil Gargoyle",
                 2.0F,
                 0.0F,
                 Integer.MAX_VALUE,
@@ -149,7 +173,7 @@ public class GConfig {
 
         evilGargoyleNormalPerchHeal = config.getFloat(
                 "NormalPerchHeal",
-                Configuration.CATEGORY_GENERAL,
+                "Evil Gargoyle",
                 1.0F,
                 0.0F,
                 Integer.MAX_VALUE,
@@ -158,7 +182,7 @@ public class GConfig {
 
         evilGargoyleAttackCooldown = config.getInt(
                 "AttackCooldown",
-                Configuration.CATEGORY_GENERAL,
+                "Evil Gargoyle",
                 20,
                 1,
                 Integer.MAX_VALUE,
@@ -167,7 +191,7 @@ public class GConfig {
 
         evilGargoyleTargetSearchChance = config.getInt(
                 "TargetSearchChance",
-                Configuration.CATEGORY_GENERAL,
+                "Evil Gargoyle",
                 10,
                 1,
                 Integer.MAX_VALUE,
@@ -175,44 +199,35 @@ public class GConfig {
         );
 
         evilGargoyleExperience = config.getInt(
-                "evilGargoyleExperience",
-                Configuration.CATEGORY_GENERAL,
+                "EvilGargoyleExperience",
+                "Evil Gargoyle",
                 10,
                 0,
                 Integer.MAX_VALUE,
                 "Experience dropped by the Evil Gargoyle."
         );
 
+        gargoyleExperience = config.getInt(
+                "GGargoyleExperience",
+                "Friendly Gargoyle",
+                0,
+                0,
+                Integer.MAX_VALUE,
+                "Experience dropped by the Friendly Gargoyle."
+        );
+
         gargoyleAttackCooldown = config.getInt(
                 "GAttackCooldown",
-                Configuration.CATEGORY_GENERAL,
+                "Friendly Gargoyle",
                 20,
                 1,
                 Integer.MAX_VALUE,
                 "Ticks between melee attacks. 20 = 1 second."
         );
 
-        gargoyleFollowRange = config.getFloat(
-                "GargoyleFollowRange",
-                Configuration.CATEGORY_GENERAL,
-                24.0F,
-                1.0F,
-                Integer.MAX_VALUE,
-                "Follow range of the Normal Gargoyle."
-        );
-
-        gargoyleMovementSpeed = config.getFloat(
-                "GargoyleMovementSpeed",
-                Configuration.CATEGORY_GENERAL,
-                0.25F,
-                0.0F,
-                Integer.MAX_VALUE,
-                "Movement speed of the Normal Gargoyle."
-        );
-
         gargoyleTargetSearchChance = config.getInt(
                 "GTargetSearchChance",
-                Configuration.CATEGORY_GENERAL,
+                "Friendly Gargoyle",
                 10,
                 1,
                 Integer.MAX_VALUE,
@@ -221,7 +236,7 @@ public class GConfig {
 
         gargoyleFavoritePerchHeal = config.getFloat(
                 "GFavoritePerchHeal",
-                Configuration.CATEGORY_GENERAL,
+                "Friendly Gargoyle",
                 2.0F,
                 0.0F,
                 Integer.MAX_VALUE,
@@ -230,7 +245,7 @@ public class GConfig {
 
         gargoyleNormalPerchHeal = config.getFloat(
                 "GNormalPerchHeal",
-                Configuration.CATEGORY_GENERAL,
+                "Friendly Gargoyle",
                 1.0F,
                 0.0F,
                 Integer.MAX_VALUE,
@@ -239,79 +254,70 @@ public class GConfig {
 
         stoneGargoyleHealth = config.getFloat(
                 "StoneGargoyleHealth",
-                Configuration.CATEGORY_GENERAL,
+                "Stone Gargoyle",
                 50.0F,
                 1.0F,
                 Integer.MAX_VALUE,
                 "Maximum health of the Stone Gargoyle."
         );
 
-        sandstoneGargoyleHealth = config.getFloat(
-                "SandstoneGargoyleHealth",
-                Configuration.CATEGORY_GENERAL,
-                30.0F,
-                1.0F,
-                Integer.MAX_VALUE,
-                "Maximum health of the Sandstone Gargoyle."
-        );
-
-        obsidianGargoyleHealth = config.getFloat(
-                "ObsidianGargoyleHealth",
-                Configuration.CATEGORY_GENERAL,
-                200.0F,
-                1.0F,
-                Integer.MAX_VALUE,
-                "Maximum health of the Obsidian Gargoyle."
-        );
-
-        goldenGargoyleHealth = config.getFloat(
-                "GoldGargoyleHealth",
-                Configuration.CATEGORY_GENERAL,
-                80.0F,
-                1.0F,
-                Integer.MAX_VALUE,
-                "Maximum health of the Gold Gargoyle."
-        );
-
-        ironGargoyleHealth = config.getFloat(
-                "IronGargoyleHealth",
-                Configuration.CATEGORY_GENERAL,
-                100.0F,
-                1.0F,
-                Integer.MAX_VALUE,
-                "Maximum health of the Iron Gargoyle."
-        );
-
-        endStoneGargoyleHealth = config.getFloat(
-                "EndStoneGargoyleHealth",
-                Configuration.CATEGORY_GENERAL,
-                120.0F,
-                1.0F,
-                Integer.MAX_VALUE,
-                "Maximum health of the End Stone Gargoyle."
-        );
-
-        netherBrickGargoyleHealth = config.getFloat(
-                "NetherBrickGargoyleHealth",
-                Configuration.CATEGORY_GENERAL,
-                60.0F,
-                1.0F,
-                Integer.MAX_VALUE,
-                "Maximum health of the Nether Brick Gargoyle."
-        );
-
         stoneGargoyleDamage = config.getFloat(
                 "StoneGargoyleDamage",
-                Configuration.CATEGORY_GENERAL,
+                "Stone Gargoyle",
                 10.0F,
                 1.0F,
                 Integer.MAX_VALUE,
                 "Damage of the Stone Gargoyle."
         );
 
+        stoneGargoyleKnockbackResistance = config.getFloat(
+                "StoneGargoyleKnockbackResistance",
+                "Stone Gargoyle",
+                0.0F,
+                0.0F,
+                Integer.MAX_VALUE,
+                "Knockback resistance of the Stone Gargoyle."
+        );
+
+        stoneGargoyleKnockUp= config.getFloat(
+                "StoneGargoyleKnockUp",
+                "Stone Gargoyle",
+                0.3F,
+                0.0F,
+                Integer.MAX_VALUE,
+                "How far the Stone Gargoyle knocks its target upward per hit."
+        );
+
+        stoneGargoyleMovementSpeed = config.getFloat(
+                "StoneGargoyleMovementSpeed",
+                "Stone Gargoyle",
+                0.25F,
+                0.0F,
+                Integer.MAX_VALUE,
+                "Movement speed of the Stone Gargoyle."
+        );
+
+        stoneGargoyleFollowRange = config.getFloat(
+                "StoneGargoyleFollowRange",
+                "Stone Gargoyle",
+                24.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Follow range of the Stone Gargoyle."
+        );
+
+        sandstoneGargoyleHealth = config.getFloat(
+                "SandstoneGargoyleHealth",
+                "Sandstone Gargoyle",
+                30.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Maximum health of the Sandstone Gargoyle."
+        );
+
         sandstoneGargoyleDamage = config.getFloat(
                 "SandstoneGargoyleDamage",
-                Configuration.CATEGORY_GENERAL,
+                "Sandstone Gargoyle",
                 6.0F,
                 1.0F,
                 Integer.MAX_VALUE,
@@ -320,128 +326,326 @@ public class GConfig {
 
         sandstoneGargoyleDesertDamage = config.getFloat(
                 "SandstoneGargoyleDesertDamage",
-                Configuration.CATEGORY_GENERAL,
+                "Sandstone Gargoyle",
                 12.0F,
                 1.0F,
                 Integer.MAX_VALUE,
                 "Damage of the Sandstone Gargoyle when in the desert."
         );
 
-        obsidianGargoyleDamage = config.getFloat(
-                "ObsidianGargoyleDamage",
-                Configuration.CATEGORY_GENERAL,
-                18.0F,
-                1.0F,
-                Integer.MAX_VALUE,
-                "Damage of the Obsidian Gargoyle."
-        );
-
-        goldenGargoyleDamage = config.getFloat(
-                "GoldGargoyleDamage",
-                Configuration.CATEGORY_GENERAL,
-                20.0F,
-                1.0F,
-                Integer.MAX_VALUE,
-                "Damage of the Gold Gargoyle."
-        );
-
-        ironGargoyleDamage = config.getFloat(
-                "IronGargoyleDamage",
-                Configuration.CATEGORY_GENERAL,
-                14.0F,
-                1.0F,
-                Integer.MAX_VALUE,
-                "Damage of the Iron Gargoyle."
-        );
-
-        endStoneGargoyleDamage = config.getFloat(
-                "EndStoneGargoyleDamage",
-                Configuration.CATEGORY_GENERAL,
-                26.0F,
-                1.0F,
-                Integer.MAX_VALUE,
-                "Damage of the End Stone Gargoyle."
-        );
-
-        netherBrickGargoyleDamage = config.getFloat(
-                "NetherBrickGargoyleDamage",
-                Configuration.CATEGORY_GENERAL,
-                14.0F,
-                1.0F,
-                Integer.MAX_VALUE,
-                "Damage of the Nether Brick Gargoyle."
-        );
-
-        netherBrickGargoyleFireTime = config.getInt(
-                "NetherBrickGargoyleFireTime",
-                Configuration.CATEGORY_GENERAL,
-                10,
-                0,
-                Integer.MAX_VALUE,
-                "How long the Nether Brick Gargoyle sets ppl on fire."
-        );
-
-        stoneGargoyleKnockUp= config.getFloat(
-                "StoneGargoyleKnockUp",
-                Configuration.CATEGORY_GENERAL,
-                0.3F,
+        sandstoneGargoyleKnockbackResistance = config.getFloat(
+                "SandstoneGargoyleKnockbackResistance",
+                "Sandstone Gargoyle",
+                0.0F,
                 0.0F,
                 Integer.MAX_VALUE,
-                "How far the Stone Gargoyle knocks its target upward per hit."
+                "Knockback resistance of the Sandstone Gargoyle."
         );
 
         sandstoneGargoyleKnockUp = config.getFloat(
                 "SandstoneGargoyleKnockUp",
-                Configuration.CATEGORY_GENERAL,
+                "Sandstone Gargoyle",
                 0.15F,
                 0.0F,
                 Integer.MAX_VALUE,
                 "How far the Sandstone Gargoyle knocks its target upward per hit."
         );
 
+        sandstoneGargoyleMovementSpeed = config.getFloat(
+                "SandstoneGargoyleMovementSpeed",
+                "Sandstone Gargoyle",
+                0.25F,
+                0.0F,
+                Integer.MAX_VALUE,
+                "Movement speed of the Sandstone Gargoyle."
+        );
+
+        sandstoneGargoyleFollowRange = config.getFloat(
+                "SandstoneGargoyleFollowRange",
+                "Sandstone Gargoyle",
+                24.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Follow range of the Sandstone Gargoyle."
+        );
+
+        obsidianGargoyleHealth = config.getFloat(
+                "ObsidianGargoyleHealth",
+                "Obsidian Gargoyle",
+                200.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Maximum health of the Obsidian Gargoyle."
+        );
+
+        obsidianGargoyleDamage = config.getFloat(
+                "ObsidianGargoyleDamage",
+                "Obsidian Gargoyle",
+                18.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Damage of the Obsidian Gargoyle."
+        );
+
+        obsidianGargoyleKnockbackResistance = config.getFloat(
+                "ObsidianGargoyleKnockbackResistance",
+                "Obsidian Gargoyle",
+                0.0F,
+                0.0F,
+                Integer.MAX_VALUE,
+                "Knockback resistance of the Obsidian Gargoyle."
+        );
+
         obsidianGargoyleKnockUp = config.getFloat(
                 "ObsidianGargoyleKnockUp",
-                Configuration.CATEGORY_GENERAL,
+                "Obsidian Gargoyle",
                 0.5F,
                 0.0F,
                 Integer.MAX_VALUE,
                 "How far the Obsidian Gargoyle knocks its target upward per hit."
         );
 
+        obsidianGargoyleMovementSpeed = config.getFloat(
+                "ObsidianGargoyleMovementSpeed",
+                "Obsidian Gargoyle",
+                0.25F,
+                0.0F,
+                Integer.MAX_VALUE,
+                "Movement speed of the Obsidian Gargoyle."
+        );
+
+        obsidianGargoyleFollowRange = config.getFloat(
+                "ObsidianGargoyleFollowRange",
+                "Obsidian Gargoyle",
+                24.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Follow range of the Obsidian Gargoyle."
+        );
+
+        goldenGargoyleHealth = config.getFloat(
+                "GoldenGargoyleHealth",
+                "Golden Gargoyle",
+                80.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Maximum health of the Golden Gargoyle."
+        );
+
+        goldenGargoyleDamage = config.getFloat(
+                "GoldenGargoyleDamage",
+                "Golden Gargoyle",
+                20.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Damage of the Golden Gargoyle."
+        );
+
+        goldenGargoyleKnockbackResistance = config.getFloat(
+                "GoldenGargoyleKnockbackResistance",
+                "Golden Gargoyle",
+                0.0F,
+                0.0F,
+                Integer.MAX_VALUE,
+                "Knockback resistance of the Golden Gargoyle."
+        );
+
         goldenGargoyleKnockUp = config.getFloat(
-                "GoldGargoyleKnockUp",
-                Configuration.CATEGORY_GENERAL,
+                "GoldenGargoyleKnockUp",
+                "Golden Gargoyle",
                 0.6F,
                 0.0F,
                 Integer.MAX_VALUE,
-                "How far the Gold Gargoyle knocks its target upward per hit."
+                "How far the Golden Gargoyle knocks its target upward per hit."
+        );
+
+        goldenGargoyleMovementSpeed = config.getFloat(
+                "GoldenGargoyleMovementSpeed",
+                "Golden Gargoyle",
+                0.25F,
+                0.0F,
+                Integer.MAX_VALUE,
+                "Movement speed of the Golden Gargoyle."
+        );
+
+        goldenGargoyleFollowRange = config.getFloat(
+                "GoldenGargoyleFollowRange",
+                "Golden Gargoyle",
+                24.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Follow range of the Golden Gargoyle."
+        );
+
+        ironGargoyleHealth = config.getFloat(
+                "IronGargoyleHealth",
+                "Iron Gargoyle",
+                100.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Maximum health of the Iron Gargoyle."
+        );
+
+        ironGargoyleDamage = config.getFloat(
+                "IronGargoyleDamage",
+                "Iron Gargoyle",
+                14.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Damage of the Iron Gargoyle."
+        );
+
+        ironGargoyleKnockbackResistance = config.getFloat(
+                "IronGargoyleKnockbackResistance",
+                "Iron Gargoyle",
+                0.0F,
+                0.0F,
+                Integer.MAX_VALUE,
+                "Knockback resistance of the Iron Gargoyle."
         );
 
         ironGargoyleKnockUp = config.getFloat(
                 "IronGargoyleKnockUp",
-                Configuration.CATEGORY_GENERAL,
+                "Iron Gargoyle",
                 0.4F,
                 0.0F,
                 Integer.MAX_VALUE,
                 "How far the Iron Gargoyle knocks its target upward per hit."
         );
 
+        ironGargoyleMovementSpeed = config.getFloat(
+                "IronGargoyleMovementSpeed",
+                "Iron Gargoyle",
+                0.25F,
+                0.0F,
+                Integer.MAX_VALUE,
+                "Movement speed of the Iron Gargoyle."
+        );
+
+        ironGargoyleFollowRange = config.getFloat(
+                "IronGargoyleFollowRange",
+                "Iron Gargoyle",
+                24.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Follow range of the Iron Gargoyle."
+        );
+
+        endStoneGargoyleHealth = config.getFloat(
+                "EndStoneGargoyleHealth",
+                "End Stone Gargoyle",
+                120.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Maximum health of the End Stone Gargoyle."
+        );
+
+        endStoneGargoyleDamage = config.getFloat(
+                "EndStoneGargoyleDamage",
+                "End Stone Gargoyle",
+                26.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Damage of the End Stone Gargoyle."
+        );
+
+        endStoneGargoyleKnockbackResistance = config.getFloat(
+                "EndStoneGargoyleKnockbackResistance",
+                "End Stone Gargoyle",
+                0.0F,
+                0.0F,
+                Integer.MAX_VALUE,
+                "Knockback resistance of the End Stone Gargoyle."
+        );
+
         endStoneGargoyleKnockUp = config.getFloat(
                 "EndStoneGargoyleKnockUp",
-                Configuration.CATEGORY_GENERAL,
+                "End Stone Gargoyle",
                 0.5F,
                 0.0F,
                 Integer.MAX_VALUE,
                 "How far the End Stone Gargoyle knocks its target upward per hit."
         );
 
-        netherBrickGargoyleKnockUp = config.getFloat(
-                "NetherBrickGargoyleKnockUp",
-                Configuration.CATEGORY_GENERAL,
+        endStoneGargoyleMovementSpeed = config.getFloat(
+                "EndStoneGargoyleMovementSpeed",
+                "End Stone Gargoyle",
+                0.25F,
+                0.0F,
+                Integer.MAX_VALUE,
+                "Movement speed of the End Stone Gargoyle."
+        );
+
+        endStoneGargoyleFollowRange = config.getFloat(
+                "EndStoneGargoyleFollowRange",
+                "End Stone Gargoyle",
+                24.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Follow range of the End Stone Gargoyle."
+        );
+
+        netheraticGargoyleHealth = config.getFloat(
+                "NetheraticGargoyleHealth",
+                "Netheratic Gargoyle",
+                60.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Maximum health of the Netheratic Gargoyle."
+        );
+
+        netheraticGargoyleDamage = config.getFloat(
+                "NetheraticGargoyleDamage",
+                "Netheratic Gargoyle",
+                14.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Damage of the Netheratic Gargoyle."
+        );
+
+        netheraticGargoyleKnockbackResistance = config.getFloat(
+                "NetheraticGargoyleKnockbackResistance",
+                "Netheratic Gargoyle",
+                0.0F,
+                0.0F,
+                Integer.MAX_VALUE,
+                "Knockback resistance of the Netheratic Gargoyle."
+        );
+
+        netheraticGargoyleFireTime = config.getInt(
+                "NetheraticGargoyleFireTime",
+                "Netheratic Gargoyle",
+                10,
+                0,
+                Integer.MAX_VALUE,
+                "How long the Netheratic Gargoyle sets ppl on fire."
+        );
+
+        netheraticGargoyleKnockUp = config.getFloat(
+                "NetheraticGargoyleKnockUp",
+                "Netheratic Gargoyle",
                 0.3F,
                 0.0F,
                 Integer.MAX_VALUE,
-                "How far the Nether Brick Gargoyle knocks its target upward per hit."
+                "How far the Netheratic Gargoyle knocks its target upward per hit."
+        );
+
+        netheraticGargoyleMovementSpeed = config.getFloat(
+                "NetheraticGargoyleMovementSpeed",
+                "Netheratic Gargoyle",
+                0.25F,
+                0.0F,
+                Integer.MAX_VALUE,
+                "Movement speed of the Netheratic Gargoyle."
+        );
+
+        netheraticGargoyleFollowRange = config.getFloat(
+                "NetheraticGargoyleFollowRange",
+                "Netheratic Gargoyle",
+                24.0F,
+                1.0F,
+                Integer.MAX_VALUE,
+                "Follow range of the Netheratic Gargoyle."
         );
 
         if (config.hasChanged()) {

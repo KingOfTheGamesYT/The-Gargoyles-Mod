@@ -1,6 +1,7 @@
 package net.minecraft.gargoyles;
 
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -8,7 +9,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.item.EntityItemFrame;
-import net.minecraft.entity.monster.EntityEvilGargoyle;
+import net.minecraft.entity.monster.EntityGargoyle;
 import net.minecraft.entity.monster.EntityIllusionIllager;
 import net.minecraft.entity.monster.EntityVindicator;
 import net.minecraft.init.Blocks;
@@ -757,8 +758,8 @@ public class WorldGenCathedrial extends WorldGenerator {
         this.setBlock(x + 7, y + 4, z + 17, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 8, y + 4, z + 17, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 9, y + 4, z + 17, Blocks.STONEBRICK, 0, 3);
-        this.setBlock(x + 3, y + 4, z + 22, GargoyleBlocks.stoneperch, 0, 3);
-        this.setBlock(x + 8, y + 4, z + 22, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 3, y + 4, z + 22, RegistryHandler.stoneperch, 0, 3);
+        this.setBlock(x + 8, y + 4, z + 22, RegistryHandler.stoneperch, 0, 3);
         this.setBlock(x + 1, y + 4, z + 25, Blocks.LEAVES, 0, 3);
         this.setBlock(x + 2, y + 4, z + 25, Blocks.LEAVES, 0, 3);
         this.setBlock(x + 3, y + 4, z + 25, Blocks.LEAVES, 0, 3);
@@ -877,7 +878,7 @@ public class WorldGenCathedrial extends WorldGenerator {
         this.setBlock(x + 8, y + 5, z + 28, Blocks.LEAVES, 12, 3);
         this.setBlock(x + 9, y + 5, z + 28, Blocks.LEAVES, 0, 3);
         this.setBlock(x + 10, y + 5, z + 28, Blocks.LEAVES, 0, 3);
-        this.setBlock(x + 1, y + 6, z + 0, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 1, y + 6, z + 0, RegistryHandler.stoneperch, 0, 3);
         this.setBlock(x + 2, y + 6, z + 0, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 3, y + 6, z + 0, Blocks.STAINED_GLASS, 14, 3);
         this.setBlock(x + 4, y + 6, z + 0, Blocks.STAINED_GLASS, 0, 3);
@@ -886,11 +887,11 @@ public class WorldGenCathedrial extends WorldGenerator {
         this.setBlock(x + 7, y + 6, z + 0, Blocks.STAINED_GLASS, 0, 3);
         this.setBlock(x + 8, y + 6, z + 0, Blocks.STAINED_GLASS, 14, 3);
         this.setBlock(x + 9, y + 6, z + 0, Blocks.STONEBRICK, 0, 3);
-        this.setBlock(x + 10, y + 6, z + 0, GargoyleBlocks.stoneperch, 0, 3);
-        this.setBlock(x + 0, y + 6, z + 1, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 10, y + 6, z + 0, RegistryHandler.stoneperch, 0, 3);
+        this.setBlock(x + 0, y + 6, z + 1, RegistryHandler.stoneperch, 0, 3);
         this.setBlock(x + 1, y + 6, z + 1, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 10, y + 6, z + 1, Blocks.STONEBRICK, 0, 3);
-        this.setBlock(x + 11, y + 6, z + 1, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 11, y + 6, z + 1, RegistryHandler.stoneperch, 0, 3);
         this.setBlock(x + 0, y + 6, z + 2, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 11, y + 6, z + 2, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 0, y + 6, z + 3, Blocks.STONEBRICK, 0, 3);
@@ -919,11 +920,11 @@ public class WorldGenCathedrial extends WorldGenerator {
         this.setBlock(x + 11, y + 6, z + 14, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 0, y + 6, z + 15, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 11, y + 6, z + 15, Blocks.STONEBRICK, 0, 3);
-        this.setBlock(x + 0, y + 6, z + 16, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 0, y + 6, z + 16, RegistryHandler.stoneperch, 0, 3);
         this.setBlock(x + 1, y + 6, z + 16, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 10, y + 6, z + 16, Blocks.STONEBRICK, 0, 3);
-        this.setBlock(x + 11, y + 6, z + 16, GargoyleBlocks.stoneperch, 0, 3);
-        this.setBlock(x + 1, y + 6, z + 17, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 11, y + 6, z + 16, RegistryHandler.stoneperch, 0, 3);
+        this.setBlock(x + 1, y + 6, z + 17, RegistryHandler.stoneperch, 0, 3);
         this.setBlock(x + 2, y + 6, z + 17, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 3, y + 6, z + 17, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 4, y + 6, z + 17, Blocks.STONEBRICK, 0, 3);
@@ -932,9 +933,9 @@ public class WorldGenCathedrial extends WorldGenerator {
         this.setBlock(x + 7, y + 6, z + 17, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 8, y + 6, z + 17, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 9, y + 6, z + 17, Blocks.STONEBRICK, 0, 3);
-        this.setBlock(x + 10, y + 6, z + 17, GargoyleBlocks.stoneperch, 0, 3);
-        this.setBlock(x + 4, y + 6, z + 18, GargoyleBlocks.stoneperch, 0, 3);
-        this.setBlock(x + 7, y + 6, z + 18, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 10, y + 6, z + 17, RegistryHandler.stoneperch, 0, 3);
+        this.setBlock(x + 4, y + 6, z + 18, RegistryHandler.stoneperch, 0, 3);
+        this.setBlock(x + 7, y + 6, z + 18, RegistryHandler.stoneperch, 0, 3);
         this.setBlock(x + 2, y + 6, z + 26, Blocks.LEAVES, 0, 3);
         this.setBlock(x + 9, y + 6, z + 26, Blocks.LEAVES, 4, 3);
         this.setBlock(x + 1, y + 6, z + 27, Blocks.LEAVES, 0, 3);
@@ -1437,9 +1438,9 @@ public class WorldGenCathedrial extends WorldGenerator {
         this.setBlock(x + 9, y + 16, z + 17, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 5, y + 16, z + 18, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 6, y + 16, z + 18, Blocks.STONEBRICK, 0, 3);
-        this.setBlock(x + 4, y + 17, z + 0, GargoyleBlocks.stoneperch, 0, 3);
-        this.setBlock(x + 7, y + 17, z + 0, GargoyleBlocks.stoneperch, 0, 3);
-        this.setBlock(x + 1, y + 17, z + 1, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 4, y + 17, z + 0, RegistryHandler.stoneperch, 0, 3);
+        this.setBlock(x + 7, y + 17, z + 0, RegistryHandler.stoneperch, 0, 3);
+        this.setBlock(x + 1, y + 17, z + 1, RegistryHandler.stoneperch, 0, 3);
         this.setBlock(x + 2, y + 17, z + 1, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 3, y + 17, z + 1, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 4, y + 17, z + 1, Blocks.STONEBRICK, 0, 3);
@@ -1448,7 +1449,7 @@ public class WorldGenCathedrial extends WorldGenerator {
         this.setBlock(x + 7, y + 17, z + 1, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 8, y + 17, z + 1, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 9, y + 17, z + 1, Blocks.STONEBRICK, 0, 3);
-        this.setBlock(x + 10, y + 17, z + 1, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 10, y + 17, z + 1, RegistryHandler.stoneperch, 0, 3);
         this.setBlock(x + 1, y + 17, z + 2, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 2, y + 17, z + 2, Blocks.CONCRETE, 15, 3);
         this.setBlock(x + 3, y + 17, z + 2, Blocks.CONCRETE, 15, 3);
@@ -1469,7 +1470,7 @@ public class WorldGenCathedrial extends WorldGenerator {
         this.setBlock(x + 8, y + 17, z + 3, Blocks.CONCRETE, 15, 3);
         this.setBlock(x + 9, y + 17, z + 3, Blocks.CONCRETE, 15, 3);
         this.setBlock(x + 10, y + 17, z + 3, Blocks.STONEBRICK, 0, 3);
-        this.setBlock(x + 0, y + 17, z + 4, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 0, y + 17, z + 4, RegistryHandler.stoneperch, 0, 3);
         this.setBlock(x + 1, y + 17, z + 4, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 2, y + 17, z + 4, Blocks.CONCRETE, 1, 3);
         this.setBlock(x + 3, y + 17, z + 4, Blocks.CONCRETE, 15, 3);
@@ -1480,7 +1481,7 @@ public class WorldGenCathedrial extends WorldGenerator {
         this.setBlock(x + 8, y + 17, z + 4, Blocks.CONCRETE, 15, 3);
         this.setBlock(x + 9, y + 17, z + 4, Blocks.CONCRETE, 1, 3);
         this.setBlock(x + 10, y + 17, z + 4, Blocks.STONEBRICK, 0, 3);
-        this.setBlock(x + 11, y + 17, z + 4, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 11, y + 17, z + 4, RegistryHandler.stoneperch, 0, 3);
         this.setBlock(x + 1, y + 17, z + 5, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 2, y + 17, z + 5, Blocks.CONCRETE, 15, 3);
         this.setBlock(x + 3, y + 17, z + 5, Blocks.CONCRETE, 1, 3);
@@ -1501,7 +1502,7 @@ public class WorldGenCathedrial extends WorldGenerator {
         this.setBlock(x + 8, y + 17, z + 6, Blocks.CONCRETE, 1, 3);
         this.setBlock(x + 9, y + 17, z + 6, Blocks.CONCRETE, 15, 3);
         this.setBlock(x + 10, y + 17, z + 6, Blocks.STONEBRICK, 0, 3);
-        this.setBlock(x + 0, y + 17, z + 7, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 0, y + 17, z + 7, RegistryHandler.stoneperch, 0, 3);
         this.setBlock(x + 1, y + 17, z + 7, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 2, y + 17, z + 7, Blocks.CONCRETE, 15, 3);
         this.setBlock(x + 3, y + 17, z + 7, Blocks.CONCRETE, 15, 3);
@@ -1512,7 +1513,7 @@ public class WorldGenCathedrial extends WorldGenerator {
         this.setBlock(x + 8, y + 17, z + 7, Blocks.CONCRETE, 15, 3);
         this.setBlock(x + 9, y + 17, z + 7, Blocks.CONCRETE, 15, 3);
         this.setBlock(x + 10, y + 17, z + 7, Blocks.STONEBRICK, 0, 3);
-        this.setBlock(x + 11, y + 17, z + 7, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 11, y + 17, z + 7, RegistryHandler.stoneperch, 0, 3);
         this.setBlock(x + 1, y + 17, z + 8, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 2, y + 17, z + 8, Blocks.CONCRETE, 15, 3);
         this.setBlock(x + 3, y + 17, z + 8, Blocks.CONCRETE, 1, 3);
@@ -1533,7 +1534,7 @@ public class WorldGenCathedrial extends WorldGenerator {
         this.setBlock(x + 8, y + 17, z + 9, Blocks.CONCRETE, 15, 3);
         this.setBlock(x + 9, y + 17, z + 9, Blocks.CONCRETE, 15, 3);
         this.setBlock(x + 10, y + 17, z + 9, Blocks.STONEBRICK, 0, 3);
-        this.setBlock(x + 0, y + 17, z + 10, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 0, y + 17, z + 10, RegistryHandler.stoneperch, 0, 3);
         this.setBlock(x + 1, y + 17, z + 10, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 2, y + 17, z + 10, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 3, y + 17, z + 10, Blocks.STONEBRICK, 0, 3);
@@ -1544,7 +1545,7 @@ public class WorldGenCathedrial extends WorldGenerator {
         this.setBlock(x + 8, y + 17, z + 10, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 9, y + 17, z + 10, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 10, y + 17, z + 10, Blocks.STONEBRICK, 0, 3);
-        this.setBlock(x + 11, y + 17, z + 10, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 11, y + 17, z + 10, RegistryHandler.stoneperch, 0, 3);
         this.setBlock(x + 0, y + 17, z + 11, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 1, y + 17, z + 11, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 2, y + 17, z + 11, Blocks.STONEBRICK, 0, 3);
@@ -1769,8 +1770,8 @@ public class WorldGenCathedrial extends WorldGenerator {
         this.setBlock(x + 8, y + 18, z + 16, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 9, y + 18, z + 16, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 10, y + 18, z + 16, Blocks.STONEBRICK, 0, 3);
-        this.setBlock(x + 4, y + 18, z + 18, GargoyleBlocks.stoneperch, 0, 3);
-        this.setBlock(x + 7, y + 18, z + 18, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 4, y + 18, z + 18, RegistryHandler.stoneperch, 0, 3);
+        this.setBlock(x + 7, y + 18, z + 18, RegistryHandler.stoneperch, 0, 3);
         this.setBlock(x + 3, y + 19, z + 3, Blocks.STONE_BRICK_STAIRS, 2, 3);
         this.setBlock(x + 4, y + 19, z + 3, Blocks.STONE_BRICK_STAIRS, 2, 3);
         this.setBlock(x + 5, y + 19, z + 3, Blocks.STONE_BRICK_STAIRS, 2, 3);
@@ -2219,8 +2220,8 @@ public class WorldGenCathedrial extends WorldGenerator {
         this.setBlock(x + 9, y + 26, z + 14, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 2, y + 27, z + 14, Blocks.STONEBRICK, 0, 3);
         this.setBlock(x + 9, y + 27, z + 14, Blocks.STONEBRICK, 0, 3);
-        this.setBlock(x + 2, y + 28, z + 14, GargoyleBlocks.stoneperch, 0, 3);
-        this.setBlock(x + 9, y + 28, z + 14, GargoyleBlocks.stoneperch, 0, 3);
+        this.setBlock(x + 2, y + 28, z + 14, RegistryHandler.stoneperch, 0, 3);
+        this.setBlock(x + 9, y + 28, z + 14, RegistryHandler.stoneperch, 0, 3);
         return true;
     }
 
@@ -2258,8 +2259,9 @@ public class WorldGenCathedrial extends WorldGenerator {
             }
         }
 
-        if (block == GargoyleBlocks.stoneperch && !this.world.isRemote) {
-            EntityEvilGargoyle host = new EntityEvilGargoyle(this.world);
+        if (block == RegistryHandler.stoneperch && !this.world.isRemote) {
+            EntityGargoyle host = new EntityGargoyle(this.world);
+            host.setGargoyleType(7);
             host.setLocationAndAngles((double)x + (double)0.5F, (double)y + (double)1.0F, (double)z + (double)0.5F, 0.0F, 40.0F);
             host.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(x, y, z)), (IEntityLivingData)null);
             host.waypointX = (double)x + (double)0.5F;

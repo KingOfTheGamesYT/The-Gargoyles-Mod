@@ -1,6 +1,7 @@
 package net.minecraft.gargoyles.blocks;
 
 import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDragonEgg;
 import net.minecraft.block.SoundType;

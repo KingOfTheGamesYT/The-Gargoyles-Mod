@@ -10,6 +10,15 @@ tile.endstoneperch.name=End Stone Perch
 tile.netherbrickperch.name=Nether Brick Perch
 tile.magic_pumpkin.name=Plus Pumpkin
 
+item.stone_gargoyle_spawn_egg.name=Stone Gargoyle Spawn Egg
+item.sandstone_gargoyle_spawn_egg.name=Sandstone Gargoyle Spawn Egg
+item.obsidian_gargoyle_spawn_egg.name=Obsidian Gargoyle Spawn Egg
+item.golden_gargoyle_spawn_egg.name=Golden Gargoyle Spawn Egg
+item.iron_gargoyle_spawn_egg.name=Iron Gargoyle Spawn Egg
+item.end_stone_gargoyle_spawn_egg.name=End Stone Gargoyle Spawn Egg
+item.netheratic_gargoyle_spawn_egg.name=Netheratic Gargoyle Spawn Egg
+item.evil_gargoyle_spawn_egg.name=Evil Gargoyle Spawn Egg
+
 subtitles.gargoyleLiving=gargoyle rumbles
 subtitles.gargoyleHurt=gargoyle grunt
 subtitles.gargoyleDeath=gargoyle crumbles
