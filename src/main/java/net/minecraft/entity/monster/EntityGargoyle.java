@@ -64,7 +64,6 @@ public class EntityGargoyle extends EntityIronGolem {
         this.setSize(0.9F, 2.4F);
         this.tasks.addTask(0, new AIPerch());
         this.tasks.addTask(0, new AIBeamAttack());
-        this.addPotionEffect(new PotionEffect(MobEffects.INSTANT_HEALTH, 10, 200));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[0]));
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 10, true, false, ATTACKABLE));
         this.tasks.addTask(1, new EntityAIAttackMelee(this, (double)1.0F, true));
@@ -129,56 +128,48 @@ public class EntityGargoyle extends EntityIronGolem {
         switch (type) {
             case 0:
                 this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(GConfig.stoneGargoyleHealth);
-                this.setHealth(GConfig.stoneGargoyleHealth);
                 this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(GConfig.stoneGargoyleFollowRange);
                 this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(GConfig.stoneGargoyleMovementSpeed);
                 this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(GConfig.stoneGargoyleKnockbackResistance);
                 break;
             case 1:
                 this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(GConfig.sandstoneGargoyleHealth);
-                this.setHealth(GConfig.sandstoneGargoyleHealth);
                 this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(GConfig.sandstoneGargoyleFollowRange);
                 this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(GConfig.sandstoneGargoyleMovementSpeed);
                 this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(GConfig.sandstoneGargoyleKnockbackResistance);
                 break;
             case 2:
                 this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(GConfig.obsidianGargoyleHealth);
-                this.setHealth(GConfig.obsidianGargoyleHealth);
                 this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(GConfig.obsidianGargoyleFollowRange);
                 this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(GConfig.obsidianGargoyleMovementSpeed);
                 this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(GConfig.obsidianGargoyleKnockbackResistance);
                 break;
             case 3:
                 this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(GConfig.goldenGargoyleHealth);
-                this.setHealth(GConfig.goldenGargoyleHealth);
                 this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(GConfig.goldenGargoyleFollowRange);
                 this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(GConfig.goldenGargoyleMovementSpeed);
                 this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(GConfig.goldenGargoyleKnockbackResistance);
                 break;
             case 4:
                 this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(GConfig.ironGargoyleHealth);
-                this.setHealth(GConfig.ironGargoyleHealth);
                 this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(GConfig.ironGargoyleFollowRange);
                 this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(GConfig.ironGargoyleMovementSpeed);
                 this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(GConfig.ironGargoyleKnockbackResistance);
                 break;
             case 5:
                 this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(GConfig.endStoneGargoyleHealth);
-                this.setHealth(GConfig.endStoneGargoyleHealth);
                 this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(GConfig.endStoneGargoyleFollowRange);
                 this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(GConfig.endStoneGargoyleMovementSpeed);
                 this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(GConfig.endStoneGargoyleKnockbackResistance);
                 break;
             case 6:
                 this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(GConfig.netheraticGargoyleHealth);
-                this.setHealth(GConfig.netheraticGargoyleHealth);
                 this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(GConfig.netheraticGargoyleFollowRange);
                 this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(GConfig.netheraticGargoyleMovementSpeed);
                 this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(GConfig.netheraticGargoyleKnockbackResistance);
                 break;
             case 7:
                 this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(GConfig.evilGargoyleHealth);
-                this.setHealth(GConfig.evilGargoyleHealth);
                 this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(GConfig.evilGargoyleFollowRange);
                 this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(GConfig.evilGargoyleMovementSpeed);
                 this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(GConfig.evilGargoyleKnockbackResistance);
