@@ -33,9 +33,7 @@ public class Gargoyles {
     @EventHandler
     public void preInit(FMLPreInitializationEvent e) {
         proxy.preInit(e);
-        RegistryHandler.registerEntities();
-        ModSoundEvents.registerSounds();
-        EntityParrot.registerMimicSound(EntityGargoyle.class, ModSoundEvents.gargoyleLiving);
+        EntityParrot.registerMimicSound(EntityGargoyle.class, RegistryHandler.GARGOYLE_LIVING);
         EntityParrot.registerMimicSound(EntityIronGolem.class, SoundEvents.ENTITY_IRONGOLEM_HURT);
         EntityParrot.registerMimicSound(EntitySnowman.class, SoundEvents.ENTITY_SNOWMAN_HURT);
         File configFile = new File(e.getModConfigurationDirectory(), MODID + ".cfg");

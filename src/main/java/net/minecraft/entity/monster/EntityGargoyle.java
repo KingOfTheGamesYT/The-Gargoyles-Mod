@@ -21,18 +21,15 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.gargoyles.GConfig;
 import net.minecraft.gargoyles.RegistryHandler;
-import net.minecraft.gargoyles.ModSoundEvents;
 import net.minecraft.gargoyles.blocks.BlockPerch;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumParticleTypes;
@@ -577,15 +574,15 @@ public class EntityGargoyle extends EntityIronGolem {
     }
 
     protected SoundEvent getAmbientSound() {
-        return this.getNatureBlock(this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY - (double)0.5F), MathHelper.floor(this.posZ)))) ? null : ModSoundEvents.gargoyleLiving;
+        return this.getNatureBlock(this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY - (double)0.5F), MathHelper.floor(this.posZ)))) ? null : RegistryHandler.GARGOYLE_LIVING;
     }
 
     protected SoundEvent getHurtSound(DamageSource source) {
-        return ModSoundEvents.gargoyleGrunt;
+        return RegistryHandler.GARGOYLE_GRUNT;
     }
 
     protected SoundEvent getDeathSound() {
-        return ModSoundEvents.gargoyleDeath;
+        return RegistryHandler.GARGOYLE_DEATH;
     }
 
     private void setTargetedEntity(int entityId) {
