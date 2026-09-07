@@ -1,5 +1,12 @@
-entity.gargoyle.name=Gargoyle
-entity.gargoyle_evil.name=Evil Gargoyle
+
+entity.gargoyles.gargoyle.stone=Stone Gargoyle
+entity.gargoyles.gargoyle.sandstone=Sandstone Gargoyle
+entity.gargoyles.gargoyle.obsidian=Obsidian Gargoyle
+entity.gargoyles.gargoyle.golden=Golden Gargoyle
+entity.gargoyles.gargoyle.iron=Iron Gargoyle
+entity.gargoyles.gargoyle.end_stone=End Stone Gargoyle
+entity.gargoyles.gargoyle.netheratic=Netheratic Gargoyle
+entity.gargoyles.gargoyle.evil=Evil Gargoyle
 
 tile.stoneperch.name=Stone Perch
 tile.sandstoneperch.name=Sandstone Perch

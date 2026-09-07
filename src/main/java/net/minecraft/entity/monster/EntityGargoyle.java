@@ -38,6 +38,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
@@ -118,6 +119,34 @@ public class EntityGargoyle extends EntityIronGolem {
 
     public int getGargoyleType() {
         return (Integer)this.dataManager.get(TYPE);
+    }
+
+    @Override
+    public String getName() {
+        return I18n.translateToLocal(this.getTranslationKey());
+    }
+
+    public String getTranslationKey() {
+        switch (this.getGargoyleType()) {
+            case 0:
+                return "entity.gargoyles.gargoyle.stone";
+            case 1:
+                return "entity.gargoyles.gargoyle.sandstone";
+            case 2:
+                return "entity.gargoyles.gargoyle.obsidian";
+            case 3:
+                return "entity.gargoyles.gargoyle.golden";
+            case 4:
+                return "entity.gargoyles.gargoyle.iron";
+            case 5:
+                return "entity.gargoyles.gargoyle.end_stone";
+            case 6:
+                return "entity.gargoyles.gargoyle.netheratic";
+            case 7:
+                return "entity.gargoyles.gargoyle.evil";
+            default:
+                return "entity.gargoyles.gargoyle";
+        }
     }
 
     public void setGargoyleType(int type) {
