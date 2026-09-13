@@ -104,15 +104,34 @@ public class BlockMagicPumpkin extends BlockHorizontal {
         patternHelper = pattern.match(worldIn, pos);
         if (patternHelper != null) {
             spawnGargoyle(worldIn, pattern, patternHelper, 6);
+            return;
+        }
+        spawnEvilGargoyle(worldIn, pos);
+    }
+
+    private void spawnEvilGargoyle(World worldIn, BlockPos pumpkinPos) {
+        worldIn.setBlockToAir(pumpkinPos);
+
+        EntityGargoyle gargoyle = new EntityGargoyle(worldIn);
+
+        gargoyle.setGargoyleType(7);
+        gargoyle.setCathedralSpawned(true);
+
+        gargoyle.setLocationAndAngles(pumpkinPos.getX() + 0.5D, pumpkinPos.getY() + 0.05D, pumpkinPos.getZ() + 0.5D, 0.0F, 0.0F);
+        worldIn.spawnEntity(gargoyle);
+
+        for (int i = 0; i < 120; ++i) {
+            worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pumpkinPos.getX() + worldIn.rand.nextDouble(), pumpkinPos.getY() + worldIn.rand.nextDouble() * 2.5D, pumpkinPos.getZ() + worldIn.rand.nextDouble(), 0.0D, 0.0D, 0.0D);
         }
     }
 
-    private void spawnGargoyle(World worldIn, BlockPattern pattern, BlockPattern.PatternHelper patternHelper, int gargoyleType)
-    {
+    private void spawnGargoyle(World worldIn, BlockPattern pattern, BlockPattern.PatternHelper patternHelper, int gargoyleType) {
         //Remove the structure
         for (int x = 0; x < pattern.getPalmLength(); ++x) {
             for (int y = 0; y < pattern.getThumbLength(); ++y) {
-                worldIn.setBlockState(patternHelper.translateOffset(x, y, 0).getPos(), Blocks.AIR.getDefaultState(), 2);
+                for (int z = 0; z < pattern.getFingerLength(); ++z) {
+                    worldIn.setBlockState(patternHelper.translateOffset(x, y, z).getPos(), Blocks.AIR.getDefaultState(), 2);
+                }
             }
         }
 
@@ -125,7 +144,6 @@ public class BlockMagicPumpkin extends BlockHorizontal {
         entityGargoyle.setLocationAndAngles(spawnPos.getX() + 0.5D, spawnPos.getY() + 0.05D, spawnPos.getZ() + 0.5D, 0.0F, 0.0F);
         worldIn.spawnEntity(entityGargoyle);
 
-        //Trigger summoned entity advancement
         for (EntityPlayerMP player : worldIn.getEntitiesWithinAABB(EntityPlayerMP.class, entityGargoyle.getEntityBoundingBox().grow(5.0D))) {
 
             CriteriaTriggers.SUMMONED_ENTITY.trigger(player,entityGargoyle);
@@ -138,9 +156,11 @@ public class BlockMagicPumpkin extends BlockHorizontal {
         //Notify neighbors
         for (int x = 0; x < pattern.getPalmLength(); ++x) {
             for (int y = 0; y < pattern.getThumbLength(); ++y) {
-                BlockWorldState blockState = patternHelper.translateOffset(x, y, 0);
+                for (int z = 0; z < pattern.getFingerLength(); ++z) {
+                    BlockWorldState blockState = patternHelper.translateOffset(x, y, z);
 
-                worldIn.notifyNeighborsRespectDebug(blockState.getPos(), Blocks.AIR, false);
+                    worldIn.notifyNeighborsRespectDebug(blockState.getPos(), Blocks.AIR, false);
+                }
             }
         }
     }
@@ -175,7 +195,7 @@ public class BlockMagicPumpkin extends BlockHorizontal {
 
     protected BlockPattern getStoneGargoylePattern() {
         if (this.stoneGargoylePattern == null) {
-            this.stoneGargoylePattern = FactoryBlockPattern.start().aisle(new String[]{"~^~", "SIS", "~R~"}).where('R', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.REDSTONE_BLOCK))).where('I', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.IRON_BLOCK))).where('S', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.STONE))).where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).where('^', BlockWorldState.hasState(BlockStateMatcher.forBlock(RegistryHandler.magic_pumpkin))).build();
+            this.stoneGargoylePattern = FactoryBlockPattern.start().aisle(new String[]{"~^~", "SIS", "~R~"}).aisle(new String[]{"~~~", "I~I", "~~~"}).where('I', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.IRON_BLOCK))).where('R', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.REDSTONE_BLOCK))).where('I', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.IRON_BLOCK))).where('S', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.STONE))).where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).where('^', BlockWorldState.hasState(BlockStateMatcher.forBlock(RegistryHandler.magic_pumpkin))).build();
         }
 
         return this.stoneGargoylePattern;
@@ -183,7 +203,7 @@ public class BlockMagicPumpkin extends BlockHorizontal {
 
     protected BlockPattern getSandstoneGargoylePattern() {
         if (this.sandstoneGargoylePattern == null) {
-            this.sandstoneGargoylePattern = FactoryBlockPattern.start().aisle(new String[]{"~^~", "SSS", "~R~"}).where('R', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.REDSTONE_BLOCK))).where('S', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.SANDSTONE))).where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).where('^', BlockWorldState.hasState(BlockStateMatcher.forBlock(RegistryHandler.magic_pumpkin))).build();
+            this.sandstoneGargoylePattern = FactoryBlockPattern.start().aisle(new String[]{"~^~", "SSS", "~R~"}).aisle(new String[]{"~~~", "I~I", "~~~"}).where('I', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.IRON_BLOCK))).where('R', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.REDSTONE_BLOCK))).where('S', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.SANDSTONE))).where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).where('^', BlockWorldState.hasState(BlockStateMatcher.forBlock(RegistryHandler.magic_pumpkin))).build();
         }
 
         return this.sandstoneGargoylePattern;
@@ -191,7 +211,7 @@ public class BlockMagicPumpkin extends BlockHorizontal {
 
     protected BlockPattern getObsidianGargoylePattern() {
         if (this.obsidianGargoylePattern == null) {
-            this.obsidianGargoylePattern = FactoryBlockPattern.start().aisle(new String[]{"~^~", "ODO", "~D~"}).where('D', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.DIAMOND_BLOCK))).where('O', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.OBSIDIAN))).where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).where('^', BlockWorldState.hasState(BlockStateMatcher.forBlock(RegistryHandler.magic_pumpkin))).build();
+            this.obsidianGargoylePattern = FactoryBlockPattern.start().aisle(new String[]{"~^~", "ODO", "~D~"}).aisle(new String[]{"~~~", "I~I", "~~~"}).where('I', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.IRON_BLOCK))).where('D', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.DIAMOND_BLOCK))).where('O', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.OBSIDIAN))).where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).where('^', BlockWorldState.hasState(BlockStateMatcher.forBlock(RegistryHandler.magic_pumpkin))).build();
         }
 
         return this.obsidianGargoylePattern;
@@ -199,7 +219,7 @@ public class BlockMagicPumpkin extends BlockHorizontal {
 
     protected BlockPattern getGoldenGargoylePattern() {
         if (this.goldenGargoylePattern == null) {
-            this.goldenGargoylePattern = FactoryBlockPattern.start().aisle(new String[]{"~^~", "GDG", "~D~"}).where('D', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.DIAMOND_BLOCK))).where('G', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.GOLD_BLOCK))).where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).where('^', BlockWorldState.hasState(BlockStateMatcher.forBlock(RegistryHandler.magic_pumpkin))).build();
+            this.goldenGargoylePattern = FactoryBlockPattern.start().aisle(new String[]{"~^~", "GDG", "~D~"}).aisle(new String[]{"~~~", "I~I", "~~~"}).where('I', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.IRON_BLOCK))).where('D', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.DIAMOND_BLOCK))).where('G', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.GOLD_BLOCK))).where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).where('^', BlockWorldState.hasState(BlockStateMatcher.forBlock(RegistryHandler.magic_pumpkin))).build();
         }
 
         return this.goldenGargoylePattern;
@@ -207,7 +227,7 @@ public class BlockMagicPumpkin extends BlockHorizontal {
 
     protected BlockPattern getIronGargoylePattern() {
         if (this.ironGargoylePattern == null) {
-            this.ironGargoylePattern = FactoryBlockPattern.start().aisle(new String[]{"~^~", "IGI", "~R~"}).where('R', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.REDSTONE_BLOCK))).where('I', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.IRON_BLOCK))).where('G', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.GOLD_BLOCK))).where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).where('^', BlockWorldState.hasState(BlockStateMatcher.forBlock(RegistryHandler.magic_pumpkin))).build();
+            this.ironGargoylePattern = FactoryBlockPattern.start().aisle(new String[]{"~^~", "IGI", "~R~"}).aisle(new String[]{"~~~", "I~I", "~~~"}).where('I', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.IRON_BLOCK))).where('R', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.REDSTONE_BLOCK))).where('I', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.IRON_BLOCK))).where('G', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.GOLD_BLOCK))).where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).where('^', BlockWorldState.hasState(BlockStateMatcher.forBlock(RegistryHandler.magic_pumpkin))).build();
         }
 
         return this.ironGargoylePattern;
@@ -215,7 +235,7 @@ public class BlockMagicPumpkin extends BlockHorizontal {
 
     protected BlockPattern getEndstoneGargoylePattern() {
         if (this.endstoneGargoylePattern == null) {
-            this.endstoneGargoylePattern = FactoryBlockPattern.start().aisle(new String[]{"~^~", "IGI", "~R~"}).where('^', BlockWorldState.hasState(BlockStateMatcher.forBlock(RegistryHandler.magic_pumpkin))).where('R', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.REDSTONE_BLOCK))).where('I', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.END_STONE))).where('G', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.GOLD_BLOCK))).where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).build();
+            this.endstoneGargoylePattern = FactoryBlockPattern.start().aisle(new String[]{"~^~", "IGI", "~R~"}).aisle(new String[]{"~~~", "I~I", "~~~"}).where('I', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.IRON_BLOCK))).where('^', BlockWorldState.hasState(BlockStateMatcher.forBlock(RegistryHandler.magic_pumpkin))).where('R', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.REDSTONE_BLOCK))).where('I', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.END_STONE))).where('G', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.GOLD_BLOCK))).where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).build();
         }
 
         return this.endstoneGargoylePattern;
@@ -223,7 +243,7 @@ public class BlockMagicPumpkin extends BlockHorizontal {
 
     protected BlockPattern getNetheraticGargoylePattern() {
         if (this.netheraticGargoylePattern == null) {
-            this.netheraticGargoylePattern = FactoryBlockPattern.start().aisle(new String[]{"~^~", "IGI", "~R~"}).where('R', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.REDSTONE_BLOCK))).where('I', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.NETHER_BRICK))).where('G', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.GOLD_BLOCK))).where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).where('^', BlockWorldState.hasState(BlockStateMatcher.forBlock(RegistryHandler.magic_pumpkin))).build();
+            this.netheraticGargoylePattern = FactoryBlockPattern.start().aisle(new String[]{"~^~", "IGI", "~R~"}).aisle(new String[]{"~~~", "I~I", "~~~"}).where('I', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.IRON_BLOCK))).where('R', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.REDSTONE_BLOCK))).where('I', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.NETHER_BRICK))).where('G', BlockWorldState.hasState(BlockStateMatcher.forBlock(Blocks.GOLD_BLOCK))).where('~', BlockWorldState.hasState(BlockMaterialMatcher.forMaterial(Material.AIR))).where('^', BlockWorldState.hasState(BlockStateMatcher.forBlock(RegistryHandler.magic_pumpkin))).build();
         }
 
         return this.netheraticGargoylePattern;
