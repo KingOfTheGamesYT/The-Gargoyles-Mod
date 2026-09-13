@@ -10,7 +10,7 @@
     "updateUrl": "",
     "authorList": [ "RedRoseWarrior" ],
     "credits": "Originally made by Enderman_of_D00M.",
-    "logoFile": "",
+    "logoFile": "logo.png",
     "screenshots": [""],
     "parent": "",
     "requiredMods": [ "FML" ],
