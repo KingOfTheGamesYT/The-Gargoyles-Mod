@@ -73,7 +73,7 @@ public class RegistryHandler {
 
         // Sounds
         GARGOYLE_LIVING = registerSound("gargoyleLiving");
-        GARGOYLE_LIVING = registerSound("gargoyleGrunt");
+        GARGOYLE_GRUNT = registerSound("gargoyleGrunt");
         GARGOYLE_DEATH = registerSound("gargoyleDeath");
 
         //Entities

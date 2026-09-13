@@ -2260,13 +2260,51 @@ public class WorldGenCathedrial extends WorldGenerator {
         }
 
         if (block == RegistryHandler.stoneperch && !this.world.isRemote) {
+
+            int gargoyleType = this.world.rand.nextInt(8);
+
+            switch (gargoyleType) {
+                case 0:
+                    block = RegistryHandler.stoneperch;
+                    break;
+
+                case 1:
+                    block = RegistryHandler.sandstoneperch;
+                    break;
+
+                case 2:
+                    block = RegistryHandler.obsidianperch;
+                    break;
+
+                case 3:
+                    block = RegistryHandler.goldperch;
+                    break;
+
+                case 4:
+                    block = RegistryHandler.ironperch;
+                    break;
+
+                case 5:
+                    block = RegistryHandler.endstoneperch;
+                    break;
+
+                case 6:
+                    block = RegistryHandler.netherbrickperch;
+                    break;
+
+                case 7:
+                    block = RegistryHandler.stoneperch;
+                    break;
+            }
+
             EntityGargoyle host = new EntityGargoyle(this.world);
-            host.setGargoyleType(7);
-            host.setLocationAndAngles((double)x + (double)0.5F, (double)y + (double)1.0F, (double)z + (double)0.5F, 0.0F, 40.0F);
+            host.setGargoyleType(gargoyleType);
+            host.setCathedralSpawned(true);
+            host.setLocationAndAngles((double)x + 0.5D, (double)y + 1.0D, (double)z + 0.5D, 0.0F, 40.0F);
             host.onInitialSpawn(this.world.getDifficultyForLocation(new BlockPos(x, y, z)), (IEntityLivingData)null);
-            host.waypointX = (double)x + (double)0.5F;
-            host.waypointY = (double)y - (double)1.0F;
-            host.waypointZ = (double)z + (double)0.5F;
+            host.waypointX = (double)x + 0.5D;
+            host.waypointY = (double)y - 1.0D;
+            host.waypointZ = (double)z + 0.5D;
             host.enablePersistence();
             this.world.spawnEntity(host);
         }

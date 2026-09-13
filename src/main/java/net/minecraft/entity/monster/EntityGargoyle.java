@@ -54,6 +54,7 @@ public class EntityGargoyle extends EntityIronGolem {
     private static final DataParameter<Integer> STATE;
     private static final DataParameter<Integer> TARGET_ENTITY;
     private static final DataParameter<Integer> TYPE;
+    private static final DataParameter<Boolean> CATHEDRAL_SPAWNED = EntityDataManager.createKey(EntityGargoyle.class, DataSerializers.BOOLEAN);
     private UUID creatorUUID;
 
     public EntityGargoyle(World world) {
@@ -100,6 +101,7 @@ public class EntityGargoyle extends EntityIronGolem {
         this.dataManager.register(STATE, -1);
         this.dataManager.register(TYPE, 0);
         this.dataManager.register(TARGET_ENTITY, 0);
+        this.dataManager.register(CATHEDRAL_SPAWNED, false);
     }
 
     public int getState() {
@@ -202,6 +204,14 @@ public class EntityGargoyle extends EntityIronGolem {
         }
     }
 
+    public void setCathedralSpawned(boolean value) {
+        this.dataManager.set(CATHEDRAL_SPAWNED, value);
+    }
+
+    public boolean isCathedralSpawned() {
+        return this.dataManager.get(CATHEDRAL_SPAWNED);
+    }
+
     public void readEntityFromNBT(NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         if (compound.hasKey("GargoyleType", 99)) {
@@ -246,35 +256,42 @@ public class EntityGargoyle extends EntityIronGolem {
             return false;
         }
 
-        //Evil gargoyles can never attack another evil gargoyle.
         if (target instanceof EntityGargoyle) {
             EntityGargoyle other = (EntityGargoyle) target;
 
-            if (other.getGargoyleType() == 7) {
-                return this.getGargoyleType() != 7;
+            if (this.isCathedralSpawned() && other.isCathedralSpawned()) {
+                return false;
             }
 
-            //Evil gargoyles can attack every gargoyle (except their type) including player made ones.
-            if (this.getGargoyleType() == 7) {
+            if (this.isPlayerCreated() && other.isCathedralSpawned()) {
                 return true;
             }
 
-            //Normal gargoyles don't attack other non evil gargoyles.
+            if (this.isCathedralSpawned() && other.isPlayerCreated()) {
+                return true;
+            }
+
             return false;
         }
 
-        if (this.getGargoyleType() == 7 && target instanceof EntityPlayer) {
-            return true;
+        if (target instanceof EntityPlayer) {
+            if (this.isCathedralSpawned()) {
+                return true;
+            }
+
+            if (this.isPlayerCreated()) {
+                return false;
+            }
         }
 
-        //A normal gargoyle does not attack its creator.
-        if (this.isCreator(target)) {
-            return false;
-        }
+        if (target instanceof EntityVindicator || target instanceof EntityIllusionIllager) {
+            if (this.isCathedralSpawned()) {
+                return false;
+            }
 
-        //Normal gargoyles don't attack players.
-        if (this.isPlayerCreated() && target instanceof EntityPlayer && this.getGargoyleType() != 7) {
-            return false;
+            if (this.isPlayerCreated()) {
+                return true;
+            }
         }
 
         //Normal gargoyles only target hostile mobs.
@@ -818,10 +835,6 @@ public class EntityGargoyle extends EntityIronGolem {
         public boolean apply(@Nullable EntityLivingBase entity) {
             if (entity == null || !entity.attackable()) {
                 return false;
-            }
-
-            if (EntityGargoyle.this.getGargoyleType() == 7 && entity instanceof EntityPlayer || entity instanceof EntityGargoyle) {
-                return true;
             }
 
             return entity instanceof IMob && entity.getCustomNameTag().isEmpty();
