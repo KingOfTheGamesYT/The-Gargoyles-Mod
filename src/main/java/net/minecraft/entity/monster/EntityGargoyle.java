@@ -218,6 +218,10 @@ public class EntityGargoyle extends EntityIronGolem {
             this.setGargoyleType(compound.getByte("GargoyleType"));
         }
 
+        if (compound.hasKey("CathedralSpawned")) {
+            this.setCathedralSpawned(compound.getBoolean("CathedralSpawned"));
+        }
+
         if (compound.hasUniqueId("CreatorUUID")) {
             this.creatorUUID = compound.getUniqueId("CreatorUUID");
         }
@@ -233,6 +237,7 @@ public class EntityGargoyle extends EntityIronGolem {
 
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
+        compound.setBoolean("CathedralSpawned", this.isCathedralSpawned());
         compound.setByte("GargoyleType", (byte)this.getGargoyleType());
         if (this.creatorUUID != null) {
             compound.setUniqueId("CreatorUUID", this.creatorUUID);
@@ -835,6 +840,10 @@ public class EntityGargoyle extends EntityIronGolem {
         public boolean apply(@Nullable EntityLivingBase entity) {
             if (entity == null || !entity.attackable()) {
                 return false;
+            }
+
+            if (EntityGargoyle.this.isCathedralSpawned() && entity instanceof EntityPlayer) {
+                return true;
             }
 
             return entity instanceof IMob && entity.getCustomNameTag().isEmpty();
