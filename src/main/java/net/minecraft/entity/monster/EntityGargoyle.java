@@ -268,11 +268,7 @@ public class EntityGargoyle extends EntityIronGolem {
                 return false;
             }
 
-            if (this.isPlayerCreated() && other.isCathedralSpawned()) {
-                return true;
-            }
-
-            if (this.isCathedralSpawned() && other.isPlayerCreated()) {
+            if (this.isCathedralSpawned() != other.isCathedralSpawned()) {
                 return true;
             }
 
@@ -840,6 +836,10 @@ public class EntityGargoyle extends EntityIronGolem {
         public boolean apply(@Nullable EntityLivingBase entity) {
             if (entity == null || !entity.attackable()) {
                 return false;
+            }
+
+            if (entity instanceof EntityGargoyle) {
+                return EntityGargoyle.this.canAttackEntity(entity);
             }
 
             if (EntityGargoyle.this.isCathedralSpawned() && entity instanceof EntityPlayer) {
